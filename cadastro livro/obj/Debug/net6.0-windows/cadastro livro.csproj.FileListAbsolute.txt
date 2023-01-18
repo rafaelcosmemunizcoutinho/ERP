@@ -1,0 +1,60 @@
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.csproj.AssemblyReference.cache
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Form1.resources
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Properties.Resources.resources
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.csproj.GenerateResource.cache
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.AssemblyInfoInputs.cache
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.AssemblyInfo.cs
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.csproj.CoreCompileInputs.cache
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.exe
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.deps.json
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.runtimeconfig.json
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.pdb
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\Google.Protobuf.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\K4os.Compression.LZ4.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\K4os.Hash.xxHash.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\MySql.Data.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\Ubiety.Dns.Core.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\bin\Debug\net6.0-windows\ZstdNet.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.csproj.CopyComplete
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\refint\cadastro livro.dll
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.pdb
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.genruntimeconfig.cache
+C:\Users\rasfa\source\repos\cadastro livro\cadastro livro\obj\Debug\net6.0-windows\ref\cadastro livro.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.csproj.AssemblyReference.cache
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Form1.resources
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Properties.Resources.resources
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.csproj.GenerateResource.cache
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.AssemblyInfoInputs.cache
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.AssemblyInfo.cs
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.csproj.CoreCompileInputs.cache
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\refint\cadastro livro.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.pdb
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.exe
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.deps.json
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.runtimeconfig.json
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\cadastro livro.pdb
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\Google.Protobuf.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\K4os.Compression.LZ4.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\K4os.Hash.xxHash.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\MySql.Data.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\Ubiety.Dns.Core.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\bin\Debug\net6.0-windows\ZstdNet.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Form2.resources
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.csproj.CopyComplete
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro livro.genruntimeconfig.cache
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\ref\cadastro livro.dll
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Balanço.resources
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Form3.resources
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Form4.resources
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Form5.resources
+C:\Users\rasfa\source\repos\cadastro livro - Copia\cadastro livro\obj\Debug\net6.0-windows\cadastro_livro.Form6.resources
