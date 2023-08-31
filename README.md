@@ -1,2 +1,2 @@
 # ERP
-Sistema distribuidaora de bebidas
+Sistema distribuidora de bebidas
