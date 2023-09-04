@@ -1,0 +1,33 @@
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\ERP Distribuidora.exe
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\ERP Distribuidora.deps.json
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\ERP Distribuidora.runtimeconfig.json
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\ERP Distribuidora.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\ERP Distribuidora.pdb
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\Google.Protobuf.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\K4os.Compression.LZ4.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\K4os.Compression.LZ4.Streams.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\K4os.Hash.xxHash.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\MySql.Data.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\Ubiety.Dns.Core.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\bin\Debug\net6.0-windows\ZstdNet.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.csproj.AssemblyReference.cache
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\cadastro_livro.Balanço.resources
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\cadastro_livro.Form1.resources
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\cadastro_livro.Form2.resources
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\cadastro_livro.Form3.resources
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\cadastro_livro.Form4.resources
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\cadastro_livro.Form5.resources
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\cadastro_livro.Form6.resources
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\cadastro_livro.Properties.Resources.resources
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.csproj.GenerateResource.cache
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.GeneratedMSBuildEditorConfig.editorconfig
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.AssemblyInfoInputs.cache
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.AssemblyInfo.cs
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.csproj.CoreCompileInputs.cache
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.csproj.CopyComplete
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\refint\ERP Distribuidora.dll
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.pdb
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ERP Distribuidora.genruntimeconfig.cache
+D:\Downloads\Estudos\TCC_1\Clone_Repositorio\ERP_Distribuidora\obj\Debug\net6.0-windows\ref\ERP Distribuidora.dll
