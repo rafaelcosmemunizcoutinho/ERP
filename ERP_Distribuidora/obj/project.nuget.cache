@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WOpgzOmMq8GpTFPXdXZNCHZzo6PRyAZKL0gVsTFnEUpHl0dhwWRRUmnL4vC2vtV4RN73ViMoksDb/DFCCBTtSg==",
+  "dgSpecHash": "8ONZhy0Mc1/QUrqS8UtG9cPnU0k5hqL2mM5yvXnM673atdAaadGgI5NEyXNTGtw6mQwTfmlRkqILI8i3dYI/pA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rasfa\\source\\repos\\cadastro livro - Copia\\cadastro livro\\cadastro livro.csproj",
+  "projectFilePath": "D:\\Downloads\\Estudos\\TCC_1\\Clone_Repositorio\\ERP_Distribuidora\\ERP Distribuidora.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rasfa\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\rasfa\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
