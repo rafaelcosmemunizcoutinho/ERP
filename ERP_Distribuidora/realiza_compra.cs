@@ -2,7 +2,7 @@
 
 namespace cadastro_livro
 {
-    public partial class Form3 : Form
+    public partial class realiza_compra : Form
     {
         MySqlConnection con;
         MySqlDataReader reader;
@@ -13,7 +13,7 @@ namespace cadastro_livro
         {
             throw new NotImplementedException();
         }
-        public Form3(MySqlConnection con, MySqlDataReader reader)
+        public realiza_compra(MySqlConnection con, MySqlDataReader reader)
         {
 
             this.con = con;

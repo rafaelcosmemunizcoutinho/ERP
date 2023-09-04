@@ -1,6 +1,6 @@
 ﻿namespace cadastro_livro
 {
-    partial class Form3
+    partial class realiza_compra
     {
         /// <summary>
         /// Required designer variable.

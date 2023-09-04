@@ -1,6 +1,6 @@
 ﻿namespace cadastro_livro
 {
-    partial class Form6
+    partial class login
     {
         /// <summary>
         /// Required designer variable.

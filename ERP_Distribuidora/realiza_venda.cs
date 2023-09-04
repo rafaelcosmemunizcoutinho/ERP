@@ -2,7 +2,7 @@
 
 namespace cadastro_livro
 {
-    public partial class Form2 : Form
+    public partial class realiza_venda : Form
     {
         public string sql = "";
         public float preco_venda = 0;
@@ -10,7 +10,7 @@ namespace cadastro_livro
         MySqlDataReader reader;
 
 
-        public Form2(MySqlConnection con, MySqlDataReader reader)
+        public realiza_venda(MySqlConnection con, MySqlDataReader reader)
         {
             this.con = con;
             this.reader = reader;
