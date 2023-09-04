@@ -5,14 +5,14 @@ namespace cadastro_livro
     using System.Windows.Forms;
     using MySql.Data.MySqlClient;
 
-    public partial class Form1 : Form
+    public partial class Inicio : Form
     {
         public string sql = "";
         public int ativo;
         MySqlConnection con;
         MySqlDataReader reader;
 
-        public Form1(MySqlConnection con, MySqlDataReader reader)
+        public Inicio(MySqlConnection con, MySqlDataReader reader)
         {
             this.con = con;
             this.reader = reader;
@@ -275,25 +275,25 @@ namespace cadastro_livro
         }
         private void btnRegistraVenda_Click_1(object sender, EventArgs e)
         {
-            Form2 novaform = new Form2(con, reader);
+            realiza_venda novaform = new realiza_venda(con, reader);
             novaform.ShowDialog();
         }
 
         private void buttonComp_Click(object sender, EventArgs e)
         {
-            Form3 novaform = new Form3(con, reader);
+            realiza_compra novaform = new realiza_compra(con, reader);
             novaform.ShowDialog();
         }
 
         private void buttonCli_Click(object sender, EventArgs e)
         {
-            Form5 novaform = new Form5(con, reader);
+            crud_cliente novaform = new crud_cliente(con, reader);
             novaform.ShowDialog();
         }
 
         private void buttonFornecedor_Click(object sender, EventArgs e)
         {
-            Form4 novaform = new Form4(con, reader);
+            crud_fornecedor novaform = new crud_fornecedor(con, reader);
             novaform.ShowDialog();
         }
     }

@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace cadastro_livro
 {
-    public partial class Form5 : Form
+    public partial class crud_cliente : Form
     {
         MySqlConnection con;
         MySqlDataReader reader;
         private string status, sql = "";
         private int ativo = 0;
 
-        public Form5(MySqlConnection con, MySqlDataReader reader)
+        public crud_cliente(MySqlConnection con, MySqlDataReader reader)
         {
             InitializeComponent();
 

@@ -1,6 +1,6 @@
 ﻿namespace cadastro_livro
 {
-    partial class Form4
+    partial class crud_fornecedor
     {
         /// <summary>
         /// Required designer variable.
