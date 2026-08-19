@@ -120,6 +120,12 @@ jobs:
 
           echo "OK: sem contexto 0 linhas; cada tenant enxerga apenas o proprio dado"
 
+      - name: Testes de integração (onboarding, login e RLS)
+        run: npm run test:integration
+        env:
+          DATABASE_URL: postgres://erp_app:erp_app@localhost:5432/erp
+          AUTH_SECRET: segredo-de-ci-com-tamanho-suficiente
+
   storybook:
     name: Storybook compila
     runs-on: ubuntu-latest

@@ -14,11 +14,11 @@ Vertical de varejo alimentar (padaria, hortifrúti, mercearia, adega), construí
 
 ## Convenções herdadas
 
-De `maria-repo/maria-hub-ui`: Atomic Design com fronteira de domínio, quádrupla por componente, vocabulário de tokens Material, tema por classe `.dark`, cobertura 100% escopada, páginas finas, ts-standard, knip.
+No front: Atomic Design com fronteira de domínio, quádrupla por componente, vocabulário de tokens Material, tema por classe `.dark`, cobertura 100% escopada, páginas finas, ts-standard, knip.
 
-De `maria-repo/api`: rota fina sem regra de negócio, `<feature>_svc` com uma função pública por arquivo, exceções tipadas com status e mensagem, casos obrigatórios por endpoint, migrations expand → contract.
+No backend: rota fina sem regra de negócio, `<feature>_svc` com uma função pública por arquivo, exceções tipadas com status e mensagem, casos obrigatórios por endpoint, migrations expand → contract.
 
-**Divergência registrada:** o `api` proíbe qualquer comentário. Aqui a proibição vale, com uma exceção estreita e nomeada — armadilha de segurança, onde remover a linha causa falha silenciosa (`NOBYPASSRLS`, `FORCE RLS`, `SET LOCAL`).
+**Divergência registrada:** a referência de origem proíbe qualquer comentário. Aqui a proibição vale, com uma exceção estreita e nomeada — armadilha de segurança, onde remover a linha causa falha silenciosa (`NOBYPASSRLS`, `FORCE RLS`, `SET LOCAL`).
 
 ## Consequências
 

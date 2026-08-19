@@ -16,11 +16,13 @@ Base multi-tenant sobre a qual todo o resto se apoia.
 - [x] Row Level Security com papel de aplicação `NOBYPASSRLS`
 - [x] Catálogo de 28 permissões granulares e 5 papéis do sistema
 - [x] Healthcheck e página de status do ambiente
-- [ ] Login, sessão JWT com `tenant_id` e MFA TOTP opcional
-- [ ] Onboarding self-service com templates por segmento
-- [ ] Middleware de autorização por permissão
-- [ ] Interceptador de auditoria (antes/depois automático)
-- [ ] Layout base, tema claro/escuro, PWA instalável
+- [x] Design system: tokens verificados em contraste, Atomic Design, Storybook
+- [x] Login com sessão JWT carregando `tenant_id`, senha Argon2, MFA TOTP opcional
+- [x] Onboarding self-service com templates por segmento
+- [x] Guarda de página por permissão
+- [x] Registro de auditoria na criação da empresa
+- [ ] Interceptador de auditoria automático (antes/depois em toda alteração)
+- [ ] PWA instalável e alternador de tema na interface
 
 **Entregável:** uma empresa se cadastra, escolhe o segmento, recebe o plano de contas e as categorias do template, e faz login com controle de permissão e auditoria funcionando.
 
