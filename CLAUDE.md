@@ -46,17 +46,18 @@ legacy/           WinForms substituído
 
 1. **Nenhuma consulta de negócio fora de `comTenant()`.** O `tenant_id` vem da sessão autenticada no servidor — nunca de query string, rota ou header do cliente.
 2. **RLS é a segunda camada e depende de dois detalhes.** A aplicação conecta com o papel `erp_app` (`NOBYPASSRLS`) e toda tabela com política tem `FORCE ROW LEVEL SECURITY`. Sem qualquer um dos dois, o isolamento vira decoração — RLS não se aplica a superusuário, e o dono da tabela ignora as próprias políticas. Teste de integração cobre o vazamento entre tenants.
-3. **Sem comentário no código.** Nome e tipo explicam. A **única** exceção é armadilha de segurança, onde remover a linha causa falha silenciosa — marcada com `ARMADILHA DE SEGURANCA`. Migrations de RLS mantêm o porquê no SQL.
-4. **Atomic Design com fronteira de domínio.** Atoms e molecules em `src/ui`, genéricos, sem regra de negócio. Componente que conhece venda, lote ou DRE vive em `src/modules/<dominio>/components`. **Antes de criar UI, reutilize `src/ui`.**
-5. **Componente novo nasce com a quádrupla** — `x.tsx` + `x.test.tsx` + `x.stories.tsx` + `x.mdx`. Sem story e doc, o Atomic Design vira só nome de pasta.
-6. **Rota com menos de 20 linhas e zero regra de negócio.** Delega para `<feature>_svc`. Cada arquivo de service tem **uma** função pública (`criar*`, `obter*`, `atualizar*`); helpers levam prefixo `_`. Services conversam por chamada de service, nunca por import cruzado de schema.
-7. **Nunca lançar `Error` genérico.** Exceção própria com `status` e `mensagem`, convertida em resposta por um tratador único. Em teste, nunca comparar mensagem com string literal — use a classe.
-8. **Cobertura global 100%**, com `include` do vitest escopado só ao que já tem teste, crescendo arquivo a arquivo. Um `include` amplo travaria o primeiro PR sem chance de merge. `src/app/**` fica fora — por isso as páginas são finas.
-9. **Paleta é contrato, não gosto.** Tokens em `src/ui/theme.css`, vocabulário Material (`surface` / `on-surface` / `*-container`), tema escuro pela classe `.dark`. `src/ui/theme.test.ts` cobra AA em todos os pares nos dois temas. **O acento nunca é verde, âmbar ou vermelho** — essas três carregam significado operacional.
-10. **Estado nunca é comunicado só por cor** — cor + ícone/ponto + rótulo, sempre.
-11. **Nenhuma string solta no JSX.** Tudo passa por `t()`. Um único locale carregado (pt-BR), estrutura pronta para o segundo.
-12. **Migrations em produção: expand → contract.** Toda mudança de schema em duas etapas compatíveis, para a versão anterior não quebrar durante o deploy.
-13. **Branch sempre a partir de `main` atualizada.** Nunca commitar na `main`.
+3. **Auditoria é trigger, não helper.** `fn_auditar()` registra o antes e o depois de toda alteração nas tabelas de negócio, com o autor vindo de `app.usuario_id` — que `comTenant()` define junto com o tenant. Um helper que alguém esquece de chamar não audita e não reclama; um trigger não tem como ser esquecido. **Tabela de negócio nova liga o trigger nela**, e o teste de integração cobra. Hash de senha e segredo de MFA nunca entram na trilha.
+4. **Sem comentário no código.** Nome e tipo explicam. A **única** exceção é armadilha de segurança, onde remover a linha causa falha silenciosa — marcada com `ARMADILHA DE SEGURANCA`. Migrations de RLS mantêm o porquê no SQL.
+5. **Atomic Design com fronteira de domínio.** Atoms e molecules em `src/ui`, genéricos, sem regra de negócio. Componente que conhece venda, lote ou DRE vive em `src/modules/<dominio>/components`. **Antes de criar UI, reutilize `src/ui`.**
+6. **Componente novo nasce com a quádrupla** — `x.tsx` + `x.test.tsx` + `x.stories.tsx` + `x.mdx`. Sem story e doc, o Atomic Design vira só nome de pasta.
+7. **Rota com menos de 20 linhas e zero regra de negócio.** Delega para `<feature>_svc`. Cada arquivo de service tem **uma** função pública (`criar*`, `obter*`, `atualizar*`); helpers levam prefixo `_`. Services conversam por chamada de service, nunca por import cruzado de schema.
+8. **Nunca lançar `Error` genérico.** Exceção própria com `status` e `mensagem`, convertida em resposta por um tratador único. Em teste, nunca comparar mensagem com string literal — use a classe.
+9. **Cobertura global 100%**, com `include` do vitest escopado só ao que já tem teste, crescendo arquivo a arquivo. Um `include` amplo travaria o primeiro PR sem chance de merge. `src/app/**` fica fora — por isso as páginas são finas.
+10. **Paleta é contrato, não gosto.** Tokens em `src/ui/theme.css`, vocabulário Material (`surface` / `on-surface` / `*-container`), tema escuro pela classe `.dark`. `src/ui/theme.test.ts` cobra AA em todos os pares nos dois temas. **O acento nunca é verde, âmbar ou vermelho** — essas três carregam significado operacional.
+11. **Estado nunca é comunicado só por cor** — cor + ícone/ponto + rótulo, sempre.
+12. **Nenhuma string solta no JSX.** Tudo passa por `t()`. Um único locale carregado (pt-BR), estrutura pronta para o segundo.
+13. **Migrations em produção: expand → contract.** Toda mudança de schema em duas etapas compatíveis, para a versão anterior não quebrar durante o deploy.
+14. **Branch sempre a partir de `main` atualizada.** Nunca commitar na `main`.
 
 ## Ponteiros
 

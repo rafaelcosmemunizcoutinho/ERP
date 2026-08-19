@@ -6,7 +6,7 @@ Entrega incremental, com revisão sua ao fim de cada fase antes de começar a se
 
 ---
 
-## Fase 1 — Fundação ✅ *instalada*
+## Fase 1 — Fundação ✅ *concluída*
 
 Base multi-tenant sobre a qual todo o resto se apoia.
 
@@ -21,8 +21,8 @@ Base multi-tenant sobre a qual todo o resto se apoia.
 - [x] Onboarding self-service com templates por segmento
 - [x] Guarda de página por permissão
 - [x] Registro de auditoria na criação da empresa
-- [ ] Interceptador de auditoria automático (antes/depois em toda alteração)
-- [ ] PWA instalável e alternador de tema na interface
+- [x] Auditoria automática por trigger no PostgreSQL (antes/depois, sem depender de ninguém lembrar)
+- [x] PWA instalável e alternador de tema com script anti-flash
 
 **Entregável:** uma empresa se cadastra, escolhe o segmento, recebe o plano de contas e as categorias do template, e faz login com controle de permissão e auditoria funcionando.
 

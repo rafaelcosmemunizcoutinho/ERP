@@ -3,6 +3,7 @@ import { sairAction } from '@/modules/auth/actions'
 import type { Sessao } from '@/modules/auth/sessao_svc/_token'
 import { Badge } from '@/ui/atoms/badge'
 import { Button } from '@/ui/atoms/button'
+import { AlternadorTema } from '@/ui/molecules/alternador-tema'
 import type { Resumo } from '../resumo_svc/carregar_resumo'
 
 interface Props {
@@ -25,11 +26,14 @@ export function TelaPainel ({ sessao, resumo }: Props): React.JSX.Element {
             <span className='font-semibold text-on-surface'>{resumo.empresa}</span>
             <Badge tom='primario' comPonto={false}>{resumo.segmento}</Badge>
           </div>
-          <form action={sairAction}>
-            <Button type='submit' variante='fantasma' tamanho='pequeno'>
-              {t('auth', 'entrar.sair')}
-            </Button>
-          </form>
+          <div className='flex items-center gap-3'>
+            <AlternadorTema />
+            <form action={sairAction}>
+              <Button type='submit' variante='fantasma' tamanho='pequeno'>
+                {t('auth', 'entrar.sair')}
+              </Button>
+            </form>
+          </div>
         </div>
       </header>
 

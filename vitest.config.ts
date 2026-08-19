@@ -22,6 +22,7 @@ export default defineConfig({
         'src/ui/atoms/**/*.tsx',
         'src/lib/cn.ts',
         'src/i18n/index.ts',
+        'src/lib/tema.ts',
         'src/ui/molecules/**/*.tsx',
         'src/modules/auth/totp_svc/**/*.ts',
         'src/modules/auth/sessao_svc/_token.ts',
