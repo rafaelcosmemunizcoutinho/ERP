@@ -98,15 +98,27 @@ jobs:
             exit 1
           fi
 
-          visto=$(psql -h localhost -U erp_app -d erp -tA -c \
-            "BEGIN; SELECT set_config('app.tenant_id','$A',true); SELECT string_agg(nome, ',') FROM tenant; COMMIT;" \
-            | tail -1)
-          if [ "$visto" != "Padaria CI" ]; then
-            echo "FALHA: com contexto do tenant A o banco devolveu '$visto'; esperado 'Padaria CI'"
+          # -q suprime os rotulos BEGIN/COMMIT; sem ele, tail -1 le "COMMIT"
+          ver_como() {
+            psql -q -h localhost -U erp_app -d erp -tA -c \
+              "BEGIN; SELECT set_config('app.tenant_id','$1',true);
+               SELECT coalesce(string_agg(nome, ','), '<vazio>') FROM tenant; COMMIT;" \
+              | tail -1
+          }
+
+          visto_a=$(ver_como "$A")
+          if [ "$visto_a" != "Padaria CI" ]; then
+            echo "FALHA: no contexto do tenant A o banco devolveu '$visto_a'; esperado exatamente 'Padaria CI'"
             exit 1
           fi
 
-          echo "OK: isolamento entre tenants preservado"
+          visto_b=$(ver_como "$B")
+          if [ "$visto_b" != "Hortifruti CI" ]; then
+            echo "FALHA: no contexto do tenant B o banco devolveu '$visto_b'; esperado exatamente 'Hortifruti CI'"
+            exit 1
+          fi
+
+          echo "OK: sem contexto 0 linhas; cada tenant enxerga apenas o proprio dado"
 
   storybook:
     name: Storybook compila
