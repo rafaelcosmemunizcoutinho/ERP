@@ -1,100 +1,82 @@
-import { db } from '@/db/client'
 import { sql } from 'drizzle-orm'
+import { db } from '@/db/client'
+import { t } from '@/i18n'
+import { Badge } from '@/ui/atoms/badge'
 
 export const dynamic = 'force-dynamic'
 
-type Status = {
+interface Status {
   conectado: boolean
-  migrations: string[]
+  migrations: number
   papeis: number
   permissoes: number
-  erro?: string
 }
 
-async function carregarStatus(): Promise<Status> {
+async function carregarStatus (): Promise<Status> {
   try {
-    const migrations = await db.execute<{ nome: string }>(
-      sql`SELECT nome FROM _migration ORDER BY nome`,
+    const [migrations] = await db.execute<{ n: number }>(
+      sql`SELECT count(*)::int AS n FROM _migration`
     )
-    const papeis = await db.execute<{ n: number }>(
-      sql`SELECT count(*)::int AS n FROM papel WHERE tenant_id IS NULL`,
+    const [papeis] = await db.execute<{ n: number }>(
+      sql`SELECT count(*)::int AS n FROM papel WHERE tenant_id IS NULL`
     )
-    const permissoes = await db.execute<{ n: number }>(
-      sql`SELECT count(*)::int AS n FROM permissao`,
+    const [permissoes] = await db.execute<{ n: number }>(
+      sql`SELECT count(*)::int AS n FROM permissao`
     )
     return {
       conectado: true,
-      migrations: migrations.map((m) => m.nome),
-      papeis: papeis[0]?.n ?? 0,
-      permissoes: permissoes[0]?.n ?? 0,
+      migrations: migrations?.n ?? 0,
+      papeis: papeis?.n ?? 0,
+      permissoes: permissoes?.n ?? 0
     }
-  } catch (erro) {
-    return {
-      conectado: false,
-      migrations: [],
-      papeis: 0,
-      permissoes: 0,
-      erro: erro instanceof Error ? erro.message : String(erro),
-    }
+  } catch {
+    return { conectado: false, migrations: 0, papeis: 0, permissoes: 0 }
   }
 }
 
-export default async function Home() {
+export default async function Home (): Promise<React.JSX.Element> {
   const status = await carregarStatus()
 
+  const linhas = [
+    { rotulo: t('comum', 'ambiente.migrations'), valor: status.migrations },
+    { rotulo: t('comum', 'ambiente.papeis'), valor: status.papeis },
+    { rotulo: t('comum', 'ambiente.permissoes'), valor: status.permissoes }
+  ]
+
   return (
-    <main style={{ maxWidth: 720, margin: '0 auto', padding: '3rem 1.5rem' }}>
-      <h1 style={{ fontSize: '1.75rem', marginBottom: '0.25rem' }}>ERP Web</h1>
-      <p style={{ color: 'var(--muted)', marginTop: 0 }}>
-        ERP SaaS multi-tenant para pequenos comercios do varejo alimentar.
-      </p>
+    <main className='mx-auto max-w-2xl px-6 py-16'>
+      <h1 className='text-fs24 font-semibold tracking-tight text-on-surface'>
+        {t('comum', 'app.nome')}
+      </h1>
+      <p className='mt-1 text-on-surface-variant'>{t('comum', 'app.descricao')}</p>
 
-      <section
-        style={{
-          border: '1px solid var(--border)',
-          borderRadius: 8,
-          padding: '1.25rem',
-          marginTop: '2rem',
-        }}
-      >
-        <h2 style={{ fontSize: '1rem', marginTop: 0 }}>Ambiente</h2>
-
-        <p style={{ color: status.conectado ? 'var(--ok)' : 'var(--erro)', fontWeight: 600 }}>
-          {status.conectado ? 'Banco conectado' : 'Banco indisponivel'}
-        </p>
-
-        {status.erro && (
-          <pre
-            style={{
-              background: 'var(--border)',
-              padding: '0.75rem',
-              borderRadius: 6,
-              overflowX: 'auto',
-              fontSize: '0.8rem',
-            }}
-          >
-            {status.erro}
-          </pre>
-        )}
+      <section className='mt-10 rounded-lg border border-outline bg-surface-lowest p-6'>
+        <div className='flex items-center justify-between gap-4'>
+          <h2 className='text-fs16 font-semibold text-on-surface'>
+            {t('comum', 'ambiente.titulo')}
+          </h2>
+          <Badge tom={status.conectado ? 'sucesso' : 'perigo'}>
+            {status.conectado
+              ? t('comum', 'ambiente.bancoConectado')
+              : t('comum', 'ambiente.bancoIndisponivel')}
+          </Badge>
+        </div>
 
         {status.conectado && (
-          <ul style={{ paddingLeft: '1.1rem', color: 'var(--muted)' }}>
-            <li>
-              Migrations aplicadas: <strong>{status.migrations.length}</strong>
-            </li>
-            <li>
-              Papeis do sistema: <strong>{status.papeis}</strong>
-            </li>
-            <li>
-              Permissoes catalogadas: <strong>{status.permissoes}</strong>
-            </li>
-          </ul>
+          <dl className='mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-md border border-outline bg-outline'>
+            {linhas.map(({ rotulo, valor }) => (
+              <div key={rotulo} className='bg-surface-lowest px-4 py-3'>
+                <dt className='text-fs11 uppercase tracking-wide text-on-surface-muted'>
+                  {rotulo}
+                </dt>
+                <dd className='mt-1 font-mono text-fs18 tabular-nums text-on-surface'>{valor}</dd>
+              </div>
+            ))}
+          </dl>
         )}
       </section>
 
-      <p style={{ color: 'var(--muted)', fontSize: '0.85rem', marginTop: '2rem' }}>
-        Fundacao (Fase 1) instalada. Proximas fases em <code>docs/plano-de-fases.md</code>.
-      </p>
+      <p className='mt-8 text-fs12 text-on-surface-muted'>{t('comum', 'ambiente.rodape')}</p>
     </main>
   )
 }

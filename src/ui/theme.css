@@ -1,0 +1,80 @@
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Superfícies */
+  --color-surface: #f6f7f9;
+  --color-surface-low: #eef0f4;
+  --color-surface-lowest: #ffffff;
+  --color-surface-high: #e4e7ee;
+  --color-surface-highest: #d8dce6;
+
+  /* Marca */
+  --color-primary: #2a4bc4;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #e6ebfb;
+  --color-on-primary-container: #1e3796;
+
+  /* Conteúdo */
+  --color-on-surface: #1b1f27;
+  --color-on-surface-variant: #4b5364;
+  --color-on-surface-muted: #6d7688;
+  --color-outline: #d7dbe3;
+  --color-outline-strong: #7c8494;
+
+  /* Status */
+  --color-success: #0f8a4f;
+  --color-success-container: #d8f2e4;
+  --color-on-success-container: #066034;
+  --color-warning: #b86500;
+  --color-warning-container: #ffedd6;
+  --color-on-warning-container: #8a4a00;
+  --color-danger: #cf3434;
+  --color-danger-container: #fbe4e4;
+  --color-on-danger-container: #96201f;
+
+  /* Tipografia */
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+  --text-fs11: 0.6875rem;
+  --text-fs12: 0.75rem;
+  --text-fs13: 0.8125rem;
+  --text-fs14: 0.875rem;
+  --text-fs16: 1rem;
+  --text-fs18: 1.125rem;
+  --text-fs24: 1.5rem;
+
+  /* Raio */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+.dark {
+  --color-surface: #101319;
+  --color-surface-low: #0b0e13;
+  --color-surface-lowest: #171b23;
+  --color-surface-high: #1e232d;
+  --color-surface-highest: #262c38;
+
+  --color-primary: #8aa4ff;
+  --color-on-primary: #101319;
+  --color-primary-container: #1e2a52;
+  --color-on-primary-container: #c3d0ff;
+
+  --color-on-surface: #e7eaf0;
+  --color-on-surface-variant: #b3bac8;
+  --color-on-surface-muted: #8a93a4;
+  --color-outline: #2b313c;
+  --color-outline-strong: #727b8a;
+
+  --color-success: #3fbe83;
+  --color-success-container: #123527;
+  --color-on-success-container: #8ee0b6;
+  --color-warning: #e0a04a;
+  --color-warning-container: #3a2610;
+  --color-on-warning-container: #f3c58a;
+  --color-danger: #f07a74;
+  --color-danger-container: #3d1c1c;
+  --color-on-danger-container: #f7b0ab;
+}

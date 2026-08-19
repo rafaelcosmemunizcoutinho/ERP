@@ -1,0 +1,41 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as BadgeStories from './badge.stories'
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+Estado, em uma palavra.
+
+<Canvas of={BadgeStories.Sucesso} />
+<Controls />
+
+## A Regra do Estado Tri-canal
+
+**Nenhum estado é comunicado só por cor.** Todo badge carrega cor + ponto + rótulo, sempre. Um em doze homens tem alguma deficiência de visão de cores; num sistema onde "vencido" e "em dia" decidem se o produto vai para a prateleira ou para a perda, cor sozinha não é informação — é aposta.
+
+O ponto é decorativo para quem usa leitor de tela (`aria-hidden`), porque o rótulo já diz tudo. Ele existe para quem enxerga a tela mas não distingue o matiz.
+
+<Canvas of={BadgeStories.EstadosDeLote} />
+
+## Tons e o que significam
+
+| Tom | Significado | Exemplo no ERP |
+|---|---|---|
+| `neutro` | Sem carga, informativo | Rascunho, Em quarentena |
+| `primario` | Seleção ou destaque, sem juízo de valor | Lote selecionado |
+| `sucesso` | Em ordem, nada a fazer | Disponível, Pago, Em dia |
+| `aviso` | Exige atenção, ainda há tempo | Vence em 3 dias, Estoque baixo |
+| `perigo` | Bloqueio ou perda | Vencido, Inadimplente, Acima do limite |
+
+## Regras
+
+**Tom é semântica, não estética.** Verde não é "a cor bonita do card" — verde diz "não precisa de você". Usar tom por gosto destrói a leitura rápida da tela, que é o único motivo do badge existir.
+
+**Um badge por estado.** Empilhar três badges na mesma linha significa que a informação precisa de uma tabela, não de chips.
+
+**O rótulo é específico.** `Vence em 3 dias` vale mais que `Atenção`. O operador precisa decidir, e a decisão depende do número.
+
+## Acessibilidade
+
+Todos os pares tom/fundo são verificados automaticamente em `src/ui/theme.test.ts` contra 4,5:1 nos dois temas. O par `aviso` no tema claro passa em 5,99:1 — foi o mais apertado da paleta e continua sendo o que quebra primeiro se alguém mexer no âmbar.
