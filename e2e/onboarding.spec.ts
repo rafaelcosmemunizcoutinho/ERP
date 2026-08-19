@@ -90,3 +90,55 @@ test.describe('navegação real', () => {
     await expect(page).toHaveURL(/\/comecar$/)
   })
 })
+
+test.describe('tema e PWA', () => {
+  test('o manifesto declara o app instalável com ícones válidos', async ({ request }) => {
+    const resposta = await request.get('/manifest.webmanifest')
+    expect(resposta.ok()).toBe(true)
+
+    const manifesto = await resposta.json()
+    expect(manifesto.name).toBe('ERP Web')
+    expect(manifesto.display).toBe('standalone')
+    expect(manifesto.start_url).toBe('/painel')
+
+    const tamanhos = manifesto.icons.map((i: { sizes: string }) => i.sizes)
+    expect(tamanhos).toContain('192x192')
+    expect(tamanhos).toContain('512x512')
+
+    for (const icone of manifesto.icons) {
+      const arquivo = await request.get(icone.src)
+      expect(arquivo.ok(), `ícone ${icone.src} deve existir`).toBe(true)
+      expect(arquivo.headers()['content-type']).toContain('image/png')
+    }
+  })
+
+  test('a escolha de tema sobrevive ao recarregamento, sem lampejo', async ({ page }) => {
+    const id = marca()
+    const email = `tema-${id}@exemplo.com.br`
+    const senha = 'senha-de-teste-forte-123'
+
+    await page.goto('/comecar')
+    await page.getByLabel('Nome do comércio').fill(`Adega ${id}`)
+    await page.getByLabel('Seu nome').fill('Marcos Dias')
+    await page.getByLabel('Seu e-mail').fill(email)
+    await page.getByLabel('Crie uma senha').fill(senha)
+    await page.getByRole('button', { name: 'Criar meu sistema' }).click()
+    await expect(page).toHaveURL(/\/painel$/)
+
+    const raiz = page.locator('html')
+    await expect(raiz).not.toHaveClass(/dark/)
+
+    await page.getByRole('radio', { name: 'Escuro' }).click()
+    await expect(raiz).toHaveClass(/dark/)
+
+    await page.reload()
+    // O script anti-flash aplica a classe ANTES da primeira pintura: se ela
+    // já está presente no primeiro instante, não houve lampejo branco.
+    await expect(raiz).toHaveClass(/dark/)
+    await expect(page.getByRole('radio', { name: 'Escuro' })).toHaveAttribute('aria-checked', 'true')
+
+    await page.getByRole('radio', { name: 'Claro' }).click()
+    await page.reload()
+    await expect(raiz).not.toHaveClass(/dark/)
+  })
+})
