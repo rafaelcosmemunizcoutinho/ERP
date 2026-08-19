@@ -1,0 +1,20 @@
+{
+  "app": {
+    "nome": "ERP Web",
+    "descricao": "Gestão para pequenos comércios do varejo alimentar"
+  },
+  "ambiente": {
+    "titulo": "Ambiente",
+    "bancoConectado": "Banco conectado",
+    "bancoIndisponivel": "Banco indisponível",
+    "migrations": "Migrations aplicadas",
+    "papeis": "Papéis do sistema",
+    "permissoes": "Permissões catalogadas",
+    "rodape": "Fundação instalada. Próximas fases em docs/plano-de-fases.md."
+  },
+  "naoEncontrado": {
+    "titulo": "Página não encontrada",
+    "descricao": "O endereço acessado não existe ou foi movido.",
+    "voltar": "Voltar ao início"
+  }
+}

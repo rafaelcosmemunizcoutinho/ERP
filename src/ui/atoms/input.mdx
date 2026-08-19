@@ -1,0 +1,33 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as InputStories from './input.stories'
+
+<Meta of={InputStories} />
+
+# Input
+
+Campo de entrada. O operador digita com pressa, e o campo tem que perdoar.
+
+<Canvas of={InputStories.Padrao} />
+<Controls />
+
+## Regras
+
+**A borda identifica o controle.** Por isso ela usa `outline-strong`, não `outline`. A WCAG 1.4.11 exige 3:1 para a borda que delimita um campo — `outline` é divisor decorativo e reprovaria. Os dois tokens existem exatamente para essa distinção, e o teste de tema cobra os dois.
+
+**Erro é estado, não cor.** `invalido` marca `aria-invalid` além de trocar a borda para `danger`. Quem usa leitor de tela precisa ouvir que o campo está inválido; quem não distingue vermelho precisa da mensagem abaixo do campo.
+
+**Desabilitado continua legível.** Fundo `surface-low` e texto `on-surface-muted`, ambos acima de 4,5:1. Campo desabilitado que vira cinza-fantasma esconde informação que o operador ainda precisa ler.
+
+<Canvas of={InputStories.Invalido} />
+
+## Entrada numérica
+
+Peso, quantidade e preço são o grosso da digitação no balcão. Use `inputMode='decimal'` para o teclado numérico aparecer no celular, e alinhe valores com `tabular-nums` quando estiverem em coluna.
+
+<Canvas of={InputStories.Numerico} />
+
+## Acessibilidade
+
+- Todo campo precisa de rótulo — `<Label>` associado por `htmlFor`, ou `aria-label` quando o rótulo é visualmente redundante.
+- Foco com anel de 2px em `primary`, sem `offset`, para o anel não colidir com o campo vizinho em formulário denso.
+- `placeholder` nunca substitui rótulo: ele some quando o operador começa a digitar, e quem se distraiu perde a referência.

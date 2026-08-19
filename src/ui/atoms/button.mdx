@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls, Story } from '@storybook/addon-docs/blocks'
+import * as ButtonStories from './button.stories'
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Ação. Nunca decoração.
+
+<Canvas of={ButtonStories.Primaria} />
+<Controls />
+
+## Quando usar cada variante
+
+| Variante | Uso |
+|---|---|
+| `primaria` | A ação principal da tela. **Uma por tela** — dois primários competindo é erro de hierarquia |
+| `secundaria` | Ações de apoio: voltar, cancelar, filtrar |
+| `fantasma` | Ações em linha, dentro de tabela ou cabeçalho, onde a borda seria ruído |
+| `perigo` | Só para destruição com consequência real: cancelar venda, lançar perda, excluir |
+
+## Regras
+
+**A ação diz o que acontece.** O rótulo é o verbo do resultado — `Registrar venda`, não `Enviar`; `Lançar perda`, não `OK`. Depois da ação, a confirmação usa o particípio: `Venda registrada`.
+
+**Perigo não é ênfase.** A variante `perigo` sinaliza consequência, não importância. Um botão vermelho que só salva um cadastro treina o operador a ignorar vermelho — e o vermelho ainda precisa funcionar em `lote vencido`.
+
+**Toque de balcão.** O tamanho `medio` (36px de altura) é o padrão; `grande` existe para a tela de venda, onde o operador acerta o alvo com pressa e sem olhar.
+
+<Canvas of={ButtonStories.Tamanhos} />
+
+## Acessibilidade
+
+- Nasce como `type="button"`. Dentro de formulário, `type="submit"` é explícito — o padrão do HTML submete sem querer e já causou venda duplicada em muito sistema.
+- Foco visível com anel de 2px na cor `primary`, verificado em contraste 3:1 contra todas as superfícies.
+- Desabilitado usa `cursor: not-allowed` e permanece legível — opacidade não pode derrubar o contraste abaixo de AA.
+- `asChild` preserva a semântica: um botão que navega deve ser `<a>`, e o leitor de tela precisa ouvir "link".

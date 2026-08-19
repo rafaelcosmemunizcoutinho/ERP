@@ -1,10 +1,3 @@
-/**
- * Cliente de banco.
- *
- * Regra de ouro do multi-tenant: NENHUMA consulta de negocio roda fora de
- * `comTenant()`. O tenant vem da sessao autenticada no servidor - nunca de
- * parametro de rota, query string ou header enviado pelo cliente.
- */
 import { drizzle } from 'drizzle-orm/postgres-js'
 import { sql as raw } from 'drizzle-orm'
 import postgres from 'postgres'
@@ -12,34 +5,33 @@ import * as schema from './schema'
 
 const url = process.env.DATABASE_URL
 
-if (!url) {
+if (url === undefined || url === '') {
   throw new Error('DATABASE_URL nao definida.')
 }
 
-// max: 10 e suficiente para o porte alvo (ate ~500 vendas/dia por tenant).
 const conexao = postgres(url, { max: 10, onnotice: () => {} })
 
 export const db = drizzle(conexao, { schema })
 
+type Transacao = Parameters<Parameters<typeof db.transaction>[0]>[0]
+
 /**
- * Executa uma unidade de trabalho no contexto de um tenant.
- *
- * `SET LOCAL` vale apenas dentro da transacao, entao o vazamento de contexto
- * entre requisicoes que compartilham a mesma conexao do pool e impossivel.
- * As politicas de RLS criadas em drizzle/0002_rls.sql leem esse valor.
+ * ARMADILHA DE SEGURANCA: nenhuma consulta de negocio pode rodar fora daqui.
+ * `set_config(..., true)` e local a transacao, o que impede o contexto de
+ * vazar entre requisicoes que compartilham a mesma conexao do pool.
+ * As politicas de RLS em drizzle/0002_rls.sql leem esse valor.
  */
-export async function comTenant<T>(
+export async function comTenant<T> (
   tenantId: string,
-  fn: (tx: Parameters<Parameters<typeof db.transaction>[0]>[0]) => Promise<T>,
+  fn: (tx: Transacao) => Promise<T>
 ): Promise<T> {
-  return db.transaction(async (tx) => {
+  return await db.transaction(async (tx) => {
     await tx.execute(raw`SELECT set_config('app.tenant_id', ${tenantId}, true)`)
-    return fn(tx)
+    return await fn(tx)
   })
 }
 
-/** Ping simples usado pelo healthcheck. */
-export async function verificarBanco(): Promise<boolean> {
+export async function verificarBanco (): Promise<boolean> {
   try {
     await conexao`SELECT 1`
     return true

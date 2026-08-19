@@ -1,0 +1,137 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  POSTGRES_USER: erp
+  POSTGRES_PASSWORD: erp
+  POSTGRES_DB: erp
+
+jobs:
+  qualidade:
+    name: Tipos, lint e código morto
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Tipos
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Código morto
+        run: npm run lint:dead
+
+  testes:
+    name: Testes e cobertura
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Cobertura (gate 100% na lista escopada)
+        run: npm run test:coverage
+
+  banco:
+    name: Migrations e isolamento entre tenants
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: erp
+          POSTGRES_PASSWORD: erp
+          POSTGRES_DB: erp
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U erp -d erp"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Aplicar migrations
+        run: npm run db:migrate
+        env:
+          DATABASE_ADMIN_URL: postgres://erp:erp@localhost:5432/erp
+
+      - name: Migrations são idempotentes
+        run: npm run db:migrate
+        env:
+          DATABASE_ADMIN_URL: postgres://erp:erp@localhost:5432/erp
+
+      - name: Um tenant não enxerga o outro
+        run: |
+          set -euo pipefail
+          export PGPASSWORD=erp
+          A=11111111-1111-1111-1111-111111111111
+          B=22222222-2222-2222-2222-222222222222
+
+          psql -h localhost -U erp -d erp -v ON_ERROR_STOP=1 -c \
+            "INSERT INTO tenant (id, nome, segmento) VALUES
+               ('$A','Padaria CI','padaria'), ('$B','Hortifruti CI','hortifruti');"
+
+          export PGPASSWORD=erp_app
+
+          sem_contexto=$(psql -h localhost -U erp_app -d erp -tA -c "SELECT count(*) FROM tenant;")
+          if [ "$sem_contexto" != "0" ]; then
+            echo "FALHA: sem contexto de tenant o banco devolveu $sem_contexto linha(s); esperado 0"
+            exit 1
+          fi
+
+          visto=$(psql -h localhost -U erp_app -d erp -tA -c \
+            "BEGIN; SELECT set_config('app.tenant_id','$A',true); SELECT string_agg(nome, ',') FROM tenant; COMMIT;" \
+            | tail -1)
+          if [ "$visto" != "Padaria CI" ]; then
+            echo "FALHA: com contexto do tenant A o banco devolveu '$visto'; esperado 'Padaria CI'"
+            exit 1
+          fi
+
+          echo "OK: isolamento entre tenants preservado"
+
+  storybook:
+    name: Storybook compila
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build-storybook
+
+  build:
+    name: Build de produção
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          DATABASE_URL: postgres://erp_app:erp_app@localhost:5432/erp
+      - name: Orçamento de performance
+        run: npm run perf

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/app/**/{page,layout,route,not-found,error,loading,manifest}.{ts,tsx}",
+    "src/db/{migrate,client}.ts",
+    "src/ui/**/*.{ts,tsx}",
+    ".storybook/{main,preview}.{ts,tsx}"
+  ],
+  "project": ["src/**/*.{ts,tsx}"],
+  "ignoreDependencies": ["tailwindcss"]
+}
