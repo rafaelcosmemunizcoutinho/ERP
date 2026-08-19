@@ -67,4 +67,4 @@ legacy/           WinForms substituído
 | Decisões com trade-off registrado | `docs/adr/` |
 | Como rodar e resolver problemas | `README.md` |
 | Operacional para agentes | `AGENTS.md` |
-| Convenções herdadas | `maria-repo/api` e `maria-repo/maria-hub-ui` (ADR-0007) |
+| Origem das convenções | ADR-0007 |
