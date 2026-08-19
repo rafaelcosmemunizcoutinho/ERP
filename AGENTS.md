@@ -57,6 +57,19 @@ Se a primeira consulta devolver linhas, o isolamento quebrou. Trate como inciden
 - PR pequeno e de um assunto só. Alinhamento de convenção e feature no mesmo PR fica irrevisável — já foi separado uma vez por esse motivo.
 - Commit e push só quando pedido.
 
+## A armadilha que mais cobra pedágio
+
+**Sob RLS, esquecer o contexto de tenant não dá erro — dá silêncio.** Quatro incidentes até agora, todos iguais:
+
+1. `UPDATE ultimo_login_em` não atualizava nada e não reclamava.
+2. A limpeza dos testes de integração não apagava nada; 70 tenants encalharam até um teste falhar por motivo errado.
+3. O teste de isolamento no CI lia `COMMIT` em vez do nome do tenant.
+4. O script de limpeza reportou "nada a remover" com 27 empresas no banco: ele consultava como `erp_app`, sem contexto.
+
+**Regra prática:** toda leitura ou escrita de negócio passa por `comTenant()`. Manutenção que precisa enxergar vários tenants de uma vez conecta com o DONO (`DATABASE_ADMIN_URL`), nunca com `erp_app` — e roda pelo serviço `migrate`, que já tem essa variável.
+
+**Ao ver "0 linhas" onde deveria haver dado, suspeite do contexto antes de suspeitar da consulta.**
+
 ## Armadilhas conhecidas
 
 **Tailwind v4 não força mais `cursor: pointer`** em `<button>` — o preflight da v3 forçava. O reset está em `src/app/globals.css`; ele cobre `button` e `[role="button"]`, e **não** alcança outros papéis ARIA clicáveis. Nesses casos, `cursor-pointer` explícito no componente.

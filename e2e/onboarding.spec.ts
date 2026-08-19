@@ -55,11 +55,15 @@ test.describe('navegação real', () => {
 
     await expect(page).toHaveURL(/\/painel$/)
     await expect(page.getByRole('heading', { name: 'Olá, Rafael Coutinho' })).toBeVisible()
-    await expect(page.getByText(`Padaria ${id}`)).toBeVisible()
-    await expect(page.getByText('padaria', { exact: true })).toBeVisible()
 
-    await expect(page.getByText('Categorias')).toBeVisible()
-    await expect(page.getByText('Contas no plano')).toBeVisible()
+    // A identidade da empresa vive na barra lateral; os numeros, no conteudo.
+    const barra = page.getByRole('complementary')
+    await expect(barra.getByText(`Padaria ${id}`)).toBeVisible()
+    await expect(barra.getByText('padaria', { exact: true })).toBeVisible()
+
+    const conteudo = page.locator('#conteudo')
+    await expect(conteudo.getByText('Categorias')).toBeVisible()
+    await expect(conteudo.getByText('Contas no plano')).toBeVisible()
 
     await page.getByRole('button', { name: 'Sair' }).click()
     await expect(page).toHaveURL(/\/entrar$/)
