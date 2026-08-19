@@ -153,3 +153,48 @@ jobs:
           DATABASE_URL: postgres://erp_app:erp_app@localhost:5432/erp
       - name: Orçamento de performance
         run: npm run perf
+
+  e2e:
+    name: Navegação real (Playwright)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: erp
+          POSTGRES_PASSWORD: erp
+          POSTGRES_DB: erp
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U erp -d erp"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_ADMIN_URL: postgres://erp:erp@localhost:5432/erp
+      DATABASE_URL: postgres://erp_app:erp_app@localhost:5432/erp
+      AUTH_SECRET: segredo-de-ci-com-tamanho-suficiente
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run db:migrate
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Subir a aplicação
+        run: |
+          npm start &
+          npx wait-on http://localhost:3000/api/health --timeout 90000
+      - name: Testes de navegação
+        run: npx playwright test
+        env:
+          E2E_BASE_URL: http://localhost:3000
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-trace
+          path: test-results/
+          retention-days: 7

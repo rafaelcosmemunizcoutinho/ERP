@@ -21,7 +21,8 @@
     "storybook": "storybook dev -p 6006 -h 0.0.0.0",
     "build-storybook": "storybook build",
     "perf": "node scripts/orcamento.mjs",
-    "test:integration": "vitest run --config vitest.integration.config.ts"
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@node-rs/argon2": "^2.1.0",
@@ -38,6 +39,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@storybook/addon-a11y": "^9.1.10",
     "@storybook/addon-docs": "^9.1.10",
     "@storybook/nextjs-vite": "^9.1.10",
@@ -62,7 +64,8 @@
     "tsx": "^4.20.6",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.67.0",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "wait-on": "^9.1.0"
   },
   "ts-standard": {
     "ignore": [
