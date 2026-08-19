@@ -60,7 +60,7 @@ export function TelaComecar (): React.JSX.Element {
 
         <p className='mt-1 text-fs12 text-on-surface-variant'>{template.descricao}</p>
 
-        <ul className='mt-1 flex flex-wrap gap-1.5'>
+        <ul aria-label='Categorias do segmento' className='mt-1 flex flex-wrap gap-1.5'>
           {template.categorias.map((categoria) => (
             <li
               key={categoria.nome}

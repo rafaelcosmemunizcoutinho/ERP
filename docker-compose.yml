@@ -56,6 +56,11 @@ services:
       NODE_ENV: development
     ports:
       - "${APP_PORT:-3000}:3000"
+    networks:
+      default:
+        # "app" colide com o gTLD .app, que tem HSTS pre-carregado no Chrome:
+        # o navegador força HTTPS e a navegacao morre em ERR_SSL_PROTOCOL_ERROR.
+        aliases: ["erp-web-app"]
     volumes:
       # Codigo do host entra no container (hot reload).
       - .:/app
@@ -117,7 +122,37 @@ services:
     ports:
       - "${PGWEB_PORT:-8081}:8081"
 
+  ##########################################################################
+  # Testes de ponta a ponta - docker compose --profile e2e run --rm e2e
+  ##########################################################################
+  e2e:
+    image: mcr.microsoft.com/playwright:v1.62.1-noble
+    container_name: erp-e2e
+    profiles: ["e2e"]
+    depends_on:
+      app:
+        condition: service_started
+    environment:
+      E2E_BASE_URL: http://erp-web-app:3000
+      CI: "true"
+    working_dir: /app
+    volumes:
+      - ./e2e:/app/e2e:ro
+      - ./playwright.config.ts:/app/playwright.config.ts:ro
+      - e2e_modules:/opt/e2e
+    # Instala numa pasta PROPRIA: mexer no package-lock.json do bind mount faz
+    # o Next dev recompilar no meio da suite e a navegacao estoura o timeout.
+    command: >-
+      sh -c "cd /opt/e2e &&
+             (test -d node_modules/@playwright/test ||
+              (npm init -y >/dev/null &&
+               npm install --no-audit --no-fund @playwright/test@1.62.1)) &&
+             ln -sfn /opt/e2e/node_modules /app/node_modules &&
+             cd /app && npx playwright test"
+
+
 volumes:
   db_data:
   node_modules:
   next_cache:
+  e2e_modules:

@@ -4,8 +4,14 @@
     "src/app/**/{page,layout,route,not-found,error,loading,manifest}.{ts,tsx}",
     "src/db/{migrate,client}.ts",
     "src/ui/**/*.{ts,tsx}",
-    ".storybook/{main,preview}.{ts,tsx}"
+    ".storybook/{main,preview}.{ts,tsx}",
+    "e2e/**/*.spec.ts",
+    "scripts/*.mjs"
   ],
-  "project": ["src/**/*.{ts,tsx}"],
-  "ignoreDependencies": ["tailwindcss"]
+  "project": [
+    "src/**/*.{ts,tsx}"
+  ],
+  "ignoreDependencies": [
+    "tailwindcss"
+  ]
 }
