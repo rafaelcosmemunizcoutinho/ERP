@@ -1,0 +1,123 @@
+# ERP Web - ambiente de desenvolvimento 100% em containers.
+# Nada precisa estar instalado na maquina alem do Docker.
+#
+#   docker compose up            -> banco + aplicacao
+#   docker compose --profile tools up -d   -> + Drizzle Studio e pgweb
+#
+name: erp-web
+
+services:
+  ##########################################################################
+  # Banco de dados
+  ##########################################################################
+  db:
+    image: postgres:17-alpine
+    container_name: erp-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-erp}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-erp}
+      POSTGRES_DB: ${POSTGRES_DB:-erp}
+      # Collation deterministica: relatorios e ordenacao iguais em toda maquina
+      POSTGRES_INITDB_ARGS: "--locale=C --encoding=UTF8"
+    ports:
+      # Exposto para voce inspecionar com DBeaver/psql se quiser.
+      # A aplicacao NAO usa esta porta - ela fala com "db:5432" pela rede interna.
+      - "${DB_PORT:-5433}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-erp} -d ${POSTGRES_DB:-erp}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  ##########################################################################
+  # Aplicacao Next.js (desenvolvimento, com hot reload)
+  ##########################################################################
+  app:
+    build:
+      context: .
+      target: dev
+    container_name: erp-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    environment:
+      # A aplicacao conecta com erp_app (NOBYPASSRLS). Se conectasse com o dono
+      # do banco, o PostgreSQL ignoraria as politicas de RLS e o isolamento
+      # entre tenants existiria so no papel.
+      DATABASE_URL: postgres://erp_app:${APP_DB_PASSWORD:-erp_app}@db:5432/${POSTGRES_DB:-erp}
+      AUTH_SECRET: ${AUTH_SECRET:-dev-secret-nao-usar-em-producao}
+      NODE_ENV: development
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    volumes:
+      # Codigo do host entra no container (hot reload).
+      - .:/app
+      # node_modules e .next ficam em volumes do container: evita conflito
+      # entre binarios do Windows e do Linux e deixa o rebuild muito mais rapido.
+      - node_modules:/app/node_modules
+      - next_cache:/app/.next
+
+  ##########################################################################
+  # Migrations - roda uma vez, antes da aplicacao subir
+  ##########################################################################
+  migrate:
+    build:
+      context: .
+      target: dev
+    container_name: erp-migrate
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # Migrations rodam com o DONO do banco: precisam criar papeis e politicas.
+      DATABASE_ADMIN_URL: postgres://${POSTGRES_USER:-erp}:${POSTGRES_PASSWORD:-erp}@db:5432/${POSTGRES_DB:-erp}
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    command: npm run db:migrate
+    restart: "no"
+
+  ##########################################################################
+  # Ferramentas opcionais - docker compose --profile tools up -d
+  ##########################################################################
+  studio:
+    build:
+      context: .
+      target: dev
+    container_name: erp-studio
+    profiles: ["tools"]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-erp}:${POSTGRES_PASSWORD:-erp}@db:5432/${POSTGRES_DB:-erp}
+    ports:
+      - "${STUDIO_PORT:-4983}:4983"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    command: npm run db:studio
+
+  pgweb:
+    image: sosedoff/pgweb:latest
+    container_name: erp-pgweb
+    profiles: ["tools"]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGWEB_DATABASE_URL: postgres://${POSTGRES_USER:-erp}:${POSTGRES_PASSWORD:-erp}@db:5432/${POSTGRES_DB:-erp}?sslmode=disable
+    ports:
+      - "${PGWEB_PORT:-8081}:8081"
+
+volumes:
+  db_data:
+  node_modules:
+  next_cache:
