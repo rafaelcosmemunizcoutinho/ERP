@@ -1,9 +1,10 @@
 import auth from './locales/pt/auth.json'
+import cadastros from './locales/pt/cadastros.json'
 import comum from './locales/pt/comum.json'
 
 const LOCALE_PADRAO = 'pt' as const
 
-const dicionarios = { auth, comum } as const
+const dicionarios = { auth, cadastros, comum } as const
 
 type Dicionarios = typeof dicionarios
 type Namespace = keyof Dicionarios

@@ -157,6 +157,9 @@ jobs:
   e2e:
     name: Navegação real (Playwright)
     runs-on: ubuntu-latest
+    # Sem teto, um passo pendurado queima horas de runner antes de falhar.
+    # Ja aconteceu: playwright install ficou 25min preso no apt do runner.
+    timeout-minutes: 15
     services:
       postgres:
         image: postgres:17-alpine
@@ -182,7 +185,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run db:migrate
-      - run: npx playwright install --with-deps chromium
+      - name: Instalar o navegador
+        timeout-minutes: 6
+        run: npx playwright install --with-deps chromium
       - run: npm run build
       - name: Subir a aplicação
         run: |
@@ -192,6 +197,9 @@ jobs:
         run: npx playwright test
         env:
           E2E_BASE_URL: http://localhost:3000
+      - name: Remover as empresas criadas pelos testes
+        if: always()
+        run: npm run db:limpar-teste
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

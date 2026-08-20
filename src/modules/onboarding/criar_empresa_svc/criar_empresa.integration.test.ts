@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { sql } from 'drizzle-orm'
 import { afterAll, describe, expect, it } from 'vitest'
 import { comTenant, db } from '@/db/client'
+import { limparTenants } from '@/testes/limpar_tenant'
 import { CnpjJaCadastrado, CredenciaisInvalidas, EntradaInvalida } from '@/lib/erros'
 import { autenticar } from '@/modules/auth/login_svc/autenticar'
 import { criarEmpresa } from './criar_empresa'
@@ -28,23 +29,7 @@ async function novaEmpresa (
   return { tenantId: resultado.tenantId, usuarioId: resultado.usuarioId, email: `ana-${marca}@exemplo.com.br`, marca }
 }
 
-afterAll(async () => {
-  // Duas armadilhas aqui. Sob RLS, DELETE sem contexto de tenant e um no-op
-  // SILENCIOSO. E as FKs de empresa/usuario sao ON DELETE RESTRICT de proposito,
-  // entao os filhos saem primeiro - inclusive as contas folha antes das raizes.
-  for (const tenantId of criados) {
-    await comTenant(tenantId, async (tx) => {
-      await tx.execute(sql`DELETE FROM usuario_papel WHERE usuario_id IN (SELECT id FROM usuario)`)
-      await tx.execute(sql`DELETE FROM auditoria`)
-      await tx.execute(sql`DELETE FROM categoria`)
-      await tx.execute(sql`DELETE FROM conta_contabil WHERE pai_id IS NOT NULL`)
-      await tx.execute(sql`DELETE FROM conta_contabil`)
-      await tx.execute(sql`DELETE FROM usuario`)
-      await tx.execute(sql`DELETE FROM empresa`)
-      await tx.execute(sql`DELETE FROM tenant WHERE id = ${tenantId}::uuid`)
-    })
-  }
-})
+afterAll(async () => { await limparTenants(criados) })
 
 describe('criarEmpresa', () => {
   it('provisiona tenant, empresa, usuario e papel DONO', async () => {

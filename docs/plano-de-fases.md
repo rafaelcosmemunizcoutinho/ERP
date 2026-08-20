@@ -28,14 +28,18 @@ Base multi-tenant sobre a qual todo o resto se apoia.
 
 ---
 
-## Fase 2 — Cadastros
+## Fase 2 — Cadastros *(em andamento)*
 
-- Parceiro unificado PF/PJ (cliente e/ou fornecedor) com endereço, contatos e limite de crédito
-- Categorias e departamentos, com faixas de validade por categoria
-- Unidades de medida e fatores de conversão (fardo/caixa ↔ unidade)
-- Produto: código interno, EAN/GTIN, pesável ou unitário, preço, estoque mínimo, campos fiscais preparados (NCM, CFOP, CST, CEST)
-- Leitura de código de barras e de etiqueta EAN-13 pesável
-- Importação de cadastros por planilha
+- [x] Schema de parceiro, produto e código de barras, com RLS e auditoria
+- [x] Validação de CPF e CNPJ, este último já no formato alfanumérico
+- [x] Dígito verificador de GTIN (EAN-8, UPC-A, EAN-13, GTIN-14)
+- [x] Leitura de etiqueta EAN-13 pesável, com layout configurável por empresa
+- [x] Conversão de unidade (fardo/caixa ↔ unidade), estoque na menor unidade
+- [x] Navegação do app (AppShell) com itens filtrados por permissão
+- [x] Tela de categorias: listar, criar e editar faixas de vencimento
+- [ ] Tela de parceiro PF/PJ com limite de crédito
+- [ ] Tela de produto com código de barras e marcação de pesável
+- [ ] Importação de cadastros por planilha
 
 **Entregável:** catálogo completo cadastrado e pesquisável por código de barras.
 

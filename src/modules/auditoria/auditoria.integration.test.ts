@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { sql } from 'drizzle-orm'
 import { afterAll, describe, expect, it } from 'vitest'
 import { comTenant } from '@/db/client'
+import { limparTenants } from '@/testes/limpar_tenant'
 import { autenticar } from '@/modules/auth/login_svc/autenticar'
 import { criarEmpresa } from '@/modules/onboarding/criar_empresa_svc/criar_empresa'
 
@@ -31,19 +32,7 @@ async function novaEmpresa (): Promise<{ tenantId: string, usuarioId: string, em
   return { tenantId: criada.tenantId, usuarioId: criada.usuarioId, email }
 }
 
-afterAll(async () => {
-  for (const tenantId of criados) {
-    await comTenant(tenantId, async (tx) => {
-      await tx.execute(sql`DELETE FROM usuario_papel WHERE usuario_id IN (SELECT id FROM usuario)`)
-      await tx.execute(sql`DELETE FROM categoria`)
-      await tx.execute(sql`DELETE FROM conta_contabil WHERE pai_id IS NOT NULL`)
-      await tx.execute(sql`DELETE FROM conta_contabil`)
-      await tx.execute(sql`DELETE FROM usuario`)
-      await tx.execute(sql`DELETE FROM empresa`)
-      await tx.execute(sql`DELETE FROM tenant WHERE id = ${tenantId}::uuid`)
-    })
-  }
-})
+afterAll(async () => { await limparTenants(criados) })
 
 describe('auditoria automatica', () => {
   it('registra a criacao da empresa sem ninguem pedir', async () => {

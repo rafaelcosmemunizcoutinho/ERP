@@ -1,0 +1,30 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as AppShellStories from './app-shell.stories'
+
+<Meta of={AppShellStories} />
+
+# AppShell
+
+A moldura de toda tela autenticada: quem você é, onde está e para onde pode ir.
+
+<Canvas of={AppShellStories.Padrao} />
+<Controls />
+
+## Regras
+
+**O menu é uma consequência da permissão, não uma lista fixa.** O shell recebe `itens` já filtrados por quem montou a página. Renderizar um link e bloquear no clique ensina o operador a tentar coisas que não pode fazer — e vaza a existência de telas que ele não deveria conhecer.
+
+<Canvas of={AppShellStories.SomenteLeitura} />
+
+**A rota atual é marcada por `aria-current="page"`, não só por cor.** Quem usa leitor de tela precisa ouvir onde está; quem não distingue matiz precisa de outro sinal além do fundo azul.
+
+**A identidade da empresa fica na barra, os números ficam no conteúdo.** É a separação que permite a mesma pessoa operar duas empresas sem se perder — o nome está sempre no mesmo canto.
+
+## Acessibilidade
+
+- **Pular para o conteúdo** é o primeiro elemento focável. Sem ele, quem navega por teclado atravessa o menu inteiro em toda página.
+- O botão do menu no celular declara `aria-expanded` e aponta para a navegação por `aria-controls`.
+- O menu fecha ao navegar: no celular, ficar aberto sobre a página nova é desorientador.
+- Nome longo de empresa é truncado com `truncate`, nunca quebra o layout da barra.
+
+<Canvas of={AppShellStories.NomeLongo} />

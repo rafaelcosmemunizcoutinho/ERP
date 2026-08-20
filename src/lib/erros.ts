@@ -62,7 +62,16 @@ export class ContaDesativada extends ErroDominio {
   }
 }
 
-class Conflito extends ErroDominio {
+export class NaoEncontrado extends ErroDominio {
+  readonly status = 404
+  readonly codigo = 'NAO_ENCONTRADO'
+
+  constructor (mensagem = 'Registro não encontrado.') {
+    super(mensagem)
+  }
+}
+
+export class Conflito extends ErroDominio {
   readonly status = 409
   readonly codigo: string = 'CONFLITO'
 

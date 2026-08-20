@@ -1,0 +1,40 @@
+{
+  "nav": {
+    "painel": "Painel",
+    "categorias": "Categorias",
+    "produtos": "Produtos",
+    "parceiros": "Clientes e fornecedores",
+    "secaoCadastros": "Cadastros",
+    "menu": "Menu principal",
+    "abrirMenu": "Abrir menu",
+    "fecharMenu": "Fechar menu"
+  },
+  "categoria": {
+    "titulo": "Categorias",
+    "descricao": "Definem como o sistema agrupa produtos e a partir de quantos dias avisa que um lote está perto de vencer.",
+    "nome": "Nome",
+    "perecivel": "Perecível",
+    "alertaCritico": "Alerta crítico",
+    "alertaAtencao": "Alerta de atenção",
+    "produtos": "Produtos",
+    "situacao": "Situação",
+    "ativa": "Ativa",
+    "inativa": "Inativa",
+    "sim": "Sim",
+    "nao": "Não",
+    "dias": "{{dias}} dias",
+    "umDia": "1 dia",
+    "semAlerta": "Não vence",
+    "vazio": "Nenhuma categoria cadastrada.",
+    "novaCategoria": "Nova categoria",
+    "editar": "Editar",
+    "salvar": "Salvar",
+    "cancelar": "Cancelar",
+    "salvando": "Salvando...",
+    "ajudaCritico": "Dias antes do vencimento em que o alerta fica vermelho.",
+    "ajudaAtencao": "Dias antes do vencimento em que o alerta fica âmbar. Precisa ser maior que o crítico.",
+    "ajudaPerecivel": "Produtos com lote e data de validade controlados.",
+    "criada": "Categoria criada.",
+    "atualizada": "Categoria atualizada."
+  }
+}

@@ -22,7 +22,8 @@
     "build-storybook": "storybook build",
     "perf": "node scripts/orcamento.mjs",
     "test:integration": "vitest run --config vitest.integration.config.ts",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "db:limpar-teste": "tsx src/testes/limpar_dados_de_teste.ts"
   },
   "dependencies": {
     "@node-rs/argon2": "^2.1.0",
