@@ -10,3 +10,7 @@ test-results/
 next-env.d.ts
 *.tsbuildinfo
 storybook-static/
+
+# Permissoes locais do Claude Code: o arquivo guarda o comando inteiro que foi
+# liberado, e um `curl` liberado carrega o token dentro dele.
+.claude/settings.local.json
